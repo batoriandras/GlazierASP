@@ -2,7 +2,7 @@
 
 namespace Entities.Dto.Order
 {
-    internal class OrderShortViewDto
+    public class OrderShortViewDto
     {
         public Models.Service Service { get; set; }
         public string Description { get; set; } = "";

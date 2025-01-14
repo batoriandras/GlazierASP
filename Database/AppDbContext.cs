@@ -13,6 +13,11 @@ namespace Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Service)
+                .WithMany(s => s.Orders)
+                .HasForeignKey(o => o.ServiceId)
+                .OnDelete(DeleteBehavior.Cascade);
             base.OnModelCreating(modelBuilder);
         }
     }

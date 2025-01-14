@@ -5,7 +5,7 @@ namespace Entities.Dto.Order
     public class OrderViewDto
     {
         public string UserFullName { get; set; } = "";
-        public string UserName { get; set; } = "";
+        public string Username { get; set; } = "";
         public Models.Service Service { get; set; }
         public string Description { get; set; } = "";
         public DateTime OrderDate { get; set; }

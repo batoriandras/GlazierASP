@@ -19,7 +19,7 @@ namespace Entities.Models
         public string UserId { get; set; }
 
         public string ServiceId { get; set; }
-        public Service Service { get; set; }
+        public virtual Service? Service { get; set; }
 
         [StringLength(250)]
         public string Description { get; set; }

@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Entities.Helpers;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
-    public class Service
+    public class Service : IIdEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -12,6 +13,7 @@ namespace Entities.Models
         public string Name { get; set; }
         [StringLength(500)]
         public string Description { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
 
         public Service(string name, string description)
         {
