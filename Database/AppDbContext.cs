@@ -7,6 +7,7 @@ namespace Database
     public class AppDbContext : IdentityDbContext
     {
         public DbSet<Service> Services { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> ctx) : base(ctx) { }
 

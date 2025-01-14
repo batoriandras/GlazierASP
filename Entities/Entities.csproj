@@ -17,8 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dto\Order\" />
-    <Folder Include="Dto\Service\" />
     <Folder Include="Dto\User\" />
   </ItemGroup>
 
