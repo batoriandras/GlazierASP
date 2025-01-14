@@ -2,7 +2,7 @@
 
 namespace Entities.Dto.User
 {
-    public class UserInputDto
+    public class UserRegisterDto
     {
         [MinLength(6)]
         public required string Username { get; set; } = "";
