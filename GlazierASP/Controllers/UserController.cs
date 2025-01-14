@@ -51,7 +51,7 @@ namespace Endpoint.Controllers
         }
 
         [HttpPost("register")]
-        public async Task RegisterUser(UserRegisterDto dto)
+        public async Task RegisterUser(UserRegisterLoginDto dto)
         {
             var user = new AppUser
             {
@@ -73,7 +73,7 @@ namespace Endpoint.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UserRegisterDto dto)
+        public async Task<IActionResult> Login(UserRegisterLoginDto dto)
         {
             var user = await userManager.FindByNameAsync(dto.Username);
             if (user == null) { throw new ArgumentException("User not found"); }

@@ -55,10 +55,10 @@ namespace Endpoint.Controllers
             return orderLogic.GetOrderById(id);
         }
 
-        [HttpGet("{id}")]
-        public OrderShortViewDto GetShortOrder(string id)
-        {
-            return orderLogic.GetShortOrderById(id);
-        }
+        //[HttpGet("{id}")]
+        //public OrderShortViewDto GetShortOrder(string id)
+        //{
+        //    return orderLogic.GetShortOrderById(id);
+        //}
     }
 }
