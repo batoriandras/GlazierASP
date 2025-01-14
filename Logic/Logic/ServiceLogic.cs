@@ -34,6 +34,11 @@ namespace Logic.Logic
             return _serviceRepository.GetAll().Select(x => _dtoProvider.Mapper.Map<ServiceViewDto>(x));
         }
 
+        public ServiceViewDto GetServiceById(string id)
+        {
+            return _dtoProvider.Mapper.Map<ServiceViewDto>(_serviceRepository.FindById(id));
+        }
+
         public void deleteService(string id)
         {
             _serviceRepository.DeleteById(id);

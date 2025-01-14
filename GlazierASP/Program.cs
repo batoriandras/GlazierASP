@@ -1,4 +1,8 @@
 
+using Database;
+using Logic.Helpers;
+using Logic.Logic;
+
 namespace GlazierASP
 {
     public class Program
@@ -8,6 +12,11 @@ namespace GlazierASP
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddTransient(typeof(Repository<>));
+            builder.Services.AddTransient<DtoProvider>();
+            builder.Services.AddTransient<OrderLogic>();
+            builder.Services.AddTransient<ServiceLogic>();
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
