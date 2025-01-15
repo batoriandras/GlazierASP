@@ -1,10 +1,11 @@
-﻿using Entities.Models;
+﻿using Entities.Dto.Service;
+using Entities.Models;
 
 namespace Entities.Dto.Order
 {
     public class OrderShortViewDto
     {
-        public Models.Service Service { get; set; }
+        public ServiceViewDto Service { get; set; }
         public string Description { get; set; } = "";
         public DateTime OrderDate { get; set; }
         public DateTime DueDate { get; set; }

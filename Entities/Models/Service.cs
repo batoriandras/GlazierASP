@@ -21,5 +21,9 @@ namespace Entities.Models
             Name = name;
             Description = description;
         }
+
+        public Service()
+        {
+        }
     }
 }

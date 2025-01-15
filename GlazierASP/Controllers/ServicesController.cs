@@ -24,7 +24,6 @@ namespace Endpoint.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public void CreateService(ServiceCreateUpdateDto dto)
         {
             serviceLogic.CreateService(dto);

@@ -51,7 +51,7 @@ namespace Endpoint.Controllers
         }
 
         [HttpPost("register")]
-        public async Task RegisterUser(UserRegisterLoginDto dto)
+        public async Task RegisterUser(UserRegisterDto dto)
         {
             var user = new AppUser
             {
@@ -73,7 +73,7 @@ namespace Endpoint.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UserRegisterLoginDto dto)
+        public async Task<IActionResult> Login(UserLoginDto dto)
         {
             var user = await userManager.FindByNameAsync(dto.Username);
             if (user == null) { throw new ArgumentException("User not found"); }
@@ -105,7 +105,7 @@ namespace Endpoint.Controllers
 
         private JwtSecurityToken GenerateAccessToken(IEnumerable<Claim>? claims, int expireMinutes)
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345superSecretKey@345superSecretKey@345superSecretKey@345"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(

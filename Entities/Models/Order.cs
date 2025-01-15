@@ -23,7 +23,7 @@ namespace Entities.Models
 
         [StringLength(250)]
         public string Description { get; set; }
-        public DateTime OrderDate { get; set; }
+        public DateTime OrderDate { get; set; } = DateTime.Now;
         public DateTime DueDate { get; set; }
         public DateTime? CompletionDate { get; set; }
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
@@ -34,12 +34,11 @@ namespace Entities.Models
         [StringLength(100)]
         public string Email { get; set; }
 
-        public Order(string userId, string serviceId, Service service, string description, DateTime orderDate, DateTime dueDate, DateTime? completionDate, OrderStatus status, string address, string phoneNumber, string email)
+        public Order(string userId, string serviceId, string description, DateTime orderDate, DateTime dueDate, DateTime? completionDate, OrderStatus status, string address, string phoneNumber, string email)
         {
             Id = Guid.NewGuid().ToString();
             UserId = userId;
             ServiceId = serviceId;
-            Service = service;
             Description = description;
             OrderDate = orderDate;
             DueDate = dueDate;
@@ -48,6 +47,10 @@ namespace Entities.Models
             Address = address;
             PhoneNumber = phoneNumber;
             Email = email;
+        }
+
+        public Order()
+        {
         }
     }
 }

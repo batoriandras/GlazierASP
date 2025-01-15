@@ -8,6 +8,7 @@ namespace Database
     {
         public DbSet<Service> Services { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> ctx) : base(ctx) { }
 

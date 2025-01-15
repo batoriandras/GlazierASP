@@ -22,7 +22,7 @@ namespace Logic.Helpers
                 cfg.CreateMap<Order, OrderShortViewDto>();
 
                 cfg.CreateMap<AppUser, UserViewDto>()
-                .AfterMap((src, dest) =>
+                .AfterMap(async (src, dest) =>
                 {
                     dest.Role = userManager.IsInRoleAsync(src, "Admin").Result;
                 });
@@ -33,6 +33,7 @@ namespace Logic.Helpers
                 {
                     var user = userManager.Users.First(u => u.Id == src.UserId);
                     dest.UserFullName = user.LastName! + " " + user.FirstName;
+                    dest.Username = user.UserName;
                 });
                 cfg.CreateMap<OrderCreateDto, Order>();
                 cfg.CreateMap<OrderUpdateDto, Service>();

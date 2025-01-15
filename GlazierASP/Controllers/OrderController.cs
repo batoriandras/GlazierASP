@@ -15,9 +15,10 @@ namespace Endpoint.Controllers
         OrderLogic orderLogic;
         UserManager<AppUser> userManager;
 
-        public OrderController(OrderLogic orderLogic)
+        public OrderController(OrderLogic orderLogic, UserManager<AppUser> userManager)
         {
             this.orderLogic = orderLogic;
+            this.userManager = userManager;
         }
 
         [HttpPost]
@@ -55,10 +56,11 @@ namespace Endpoint.Controllers
             return orderLogic.GetOrderById(id);
         }
 
-        //[HttpGet("{id}")]
-        //public OrderShortViewDto GetShortOrder(string id)
-        //{
-        //    return orderLogic.GetShortOrderById(id);
-        //}
+        [HttpGet]
+        public async OrderShortViewDto GetShortOrder()
+        {
+            var user = await userManager.GetUserAsync(User);
+            return orderLogic.GetShortOrderById(user.Id);
+        }
     }
 }

@@ -54,7 +54,7 @@ namespace GlazierASP
                     ValidateAudience = true,
                     ValidAudience = "GlazierComp.com",
                     ValidIssuer = "GlazierComp.com",
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@365"))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345superSecretKey@345superSecretKey@345superSecretKey@345"))
                 };
             });
 
@@ -80,7 +80,7 @@ namespace GlazierASP
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(option =>
             {
-                option.SwaggerDoc("v1", new OpenApiInfo { Title = "GlazierComp API", Version = "v1" });
+                option.SwaggerDoc("v1", new OpenApiInfo { Title = "GlazierCompAPI", Version = "v1" });
                 option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
