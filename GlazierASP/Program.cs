@@ -24,6 +24,7 @@ namespace GlazierASP
             builder.Services.AddTransient<DtoProvider>();
             builder.Services.AddTransient<OrderLogic>();
             builder.Services.AddTransient<ServiceLogic>();
+            builder.Services.AddTransient<AdminDashboardLogic>();
 
             builder.Services.AddIdentity<AppUser, IdentityRole>(
                     option =>

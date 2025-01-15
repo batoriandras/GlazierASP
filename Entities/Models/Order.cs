@@ -1,9 +1,11 @@
 ﻿using Entities.Helpers;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Entities.Models
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum OrderStatus
     {
         Pending,
@@ -15,12 +17,9 @@ namespace Entities.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
-
         public string UserId { get; set; }
-
         public string ServiceId { get; set; }
         public virtual Service? Service { get; set; }
-
         [StringLength(250)]
         public string Description { get; set; }
         public DateTime OrderDate { get; set; } = DateTime.Now;

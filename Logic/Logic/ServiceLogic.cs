@@ -5,6 +5,15 @@ using Logic.Helpers;
 
 namespace Logic.Logic
 {
+    public interface IServiceLogic
+    {
+        void CreateService(ServiceCreateUpdateDto dto);
+        void UpdateService(string id, ServiceCreateUpdateDto dto);
+        IEnumerable<ServiceViewDto> GetAllServices();
+        ServiceViewDto GetServiceById(string id);
+        void deleteService(string id);
+    }
+
     public class ServiceLogic
     {
         Repository<Service> _serviceRepository;

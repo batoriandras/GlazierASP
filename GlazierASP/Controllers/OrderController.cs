@@ -49,18 +49,17 @@ namespace Endpoint.Controllers
             orderLogic.DeleteOrder(id);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("adminview/{id}")]
         [Authorize(Roles = "Admin")]
         public OrderViewDto GetOrder(string id)
         {
             return orderLogic.GetOrderById(id);
         }
 
-        [HttpGet]
-        public async OrderShortViewDto GetShortOrder()
+        [HttpGet("guestview/{id}")]
+        public OrderShortViewDto GetShortOrder(string id)
         {
-            var user = await userManager.GetUserAsync(User);
-            return orderLogic.GetShortOrderById(user.Id);
+            return orderLogic.GetShortOrderById(id);
         }
     }
 }

@@ -11,7 +11,6 @@ namespace Logic.Helpers
     public class DtoProvider
     {
         UserManager<AppUser> userManager;
-
         public Mapper Mapper { get; }
 
         public DtoProvider(UserManager<AppUser> userManager)
@@ -24,7 +23,7 @@ namespace Logic.Helpers
                 cfg.CreateMap<AppUser, UserViewDto>()
                 .AfterMap(async (src, dest) =>
                 {
-                    dest.Role = userManager.IsInRoleAsync(src, "Admin").Result;
+                    dest.IsAdmin = userManager.IsInRoleAsync(src, "Admin").Result;
                 });
 
 

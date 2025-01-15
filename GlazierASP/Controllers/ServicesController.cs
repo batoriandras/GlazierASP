@@ -7,7 +7,6 @@ namespace Endpoint.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class ServicesController : ControllerBase
     {
         ServiceLogic serviceLogic;
@@ -24,6 +23,7 @@ namespace Endpoint.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public void CreateService(ServiceCreateUpdateDto dto)
         {
             serviceLogic.CreateService(dto);

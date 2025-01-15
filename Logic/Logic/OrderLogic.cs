@@ -5,6 +5,18 @@ using Logic.Helpers;
 
 namespace Logic.Logic
 {
+    public interface IOrderLogic
+    {
+        void CreateOrder(OrderCreateDto dto, string userId);
+        void UpdateOrder(string id, OrderUpdateDto dto);
+        IEnumerable<OrderViewDto> GetAllOrders();
+        void DeleteOrder(string id);
+        IEnumerable<OrderShortViewDto> GetOrdersByUserId(string userId);
+        OrderViewDto GetOrderById(string id);
+        OrderShortViewDto GetShortOrderById(string id);
+        void UpdateOrderStatus(string id, OrderStatus status);
+    }
+
     public class OrderLogic
     {
         Repository<Order> _orderRepository;

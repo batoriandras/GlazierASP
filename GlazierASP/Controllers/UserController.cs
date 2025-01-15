@@ -28,20 +28,28 @@ namespace Endpoint.Controllers
 
         [HttpGet("grantadmin/{userid}")]
         [Authorize(Roles = "Admin")]
-        public async Task GrantAdmin(string userId)
+        public async Task GrantAdmin(string userid)
         {
-            var user = await userManager.FindByIdAsync(userId);
+            var user = await userManager.FindByIdAsync(userid);
             if (user == null) { throw new ArgumentException("User not found"); }
             await userManager.AddToRoleAsync(user, "Admin");
         }
 
         [HttpGet("revokeadmin/{userid}")]
         [Authorize(Roles = "Admin")]
-        public async Task RevokeAdmin(string userId)
+        public async Task RevokeAdmin(string userid)
         {
-            var user = await userManager.FindByIdAsync(userId);
+            var user = await userManager.FindByIdAsync(userid);
             if (user == null) { throw new ArgumentException("User not found"); }
             await userManager.RemoveFromRoleAsync(user, "Admin");
+        }
+
+        [HttpDelete("{userid}")]
+        public async Task DeleteUser(string userid)
+        {
+            var user = await userManager.FindByIdAsync(userid);
+            if (user == null) { throw new ArgumentException("User not found"); }
+            await userManager.DeleteAsync(user);
         }
 
         [HttpGet]
@@ -100,7 +108,6 @@ namespace Endpoint.Controllers
                     Expiration = DateTime.Now.AddMinutes(expireMinutes)
                 });
             }
-
         }
 
         private JwtSecurityToken GenerateAccessToken(IEnumerable<Claim>? claims, int expireMinutes)

@@ -2,6 +2,16 @@
 
 namespace Database
 {
+    public interface IReposioty<T> where T : class, IIdEntity
+    {
+        void Create(T entity);
+        T FindById(string id);
+        IQueryable<T> GetAll();
+        void Update(T entity);
+        void Delete(T entity);
+        void DeleteById(string id);
+    }
+
     public class Repository<T> where T : class, IIdEntity
     {
         AppDbContext _ctx;
