@@ -55,6 +55,19 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Employees",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateOfEmployment = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employees", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Services",
                 columns: table => new
                 {
@@ -174,6 +187,30 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EmployeeService",
+                columns: table => new
+                {
+                    EmployeesId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ServicesId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmployeeService", x => new { x.EmployeesId, x.ServicesId });
+                    table.ForeignKey(
+                        name: "FK_EmployeeService_Employees_EmployeesId",
+                        column: x => x.EmployeesId,
+                        principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EmployeeService_Services_ServicesId",
+                        column: x => x.ServicesId,
+                        principalTable: "Services",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -240,6 +277,11 @@ namespace Database.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EmployeeService_ServicesId",
+                table: "EmployeeService",
+                column: "ServicesId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_ServiceId",
                 table: "Orders",
                 column: "ServiceId");
@@ -264,6 +306,9 @@ namespace Database.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "EmployeeService");
+
+            migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
@@ -271,6 +316,9 @@ namespace Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "Services");

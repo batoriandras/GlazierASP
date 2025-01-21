@@ -10,6 +10,7 @@ namespace Endpoint.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "BasicUser")]
     public class OrderController : ControllerBase
     {
         OrderLogic orderLogic;

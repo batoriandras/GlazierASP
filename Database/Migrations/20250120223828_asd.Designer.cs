@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250115184039_asd")]
+    [Migration("20250120223828_asd")]
     partial class asd
     {
         /// <inheritdoc />
@@ -27,6 +27,39 @@ namespace Database.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("EmployeeService", b =>
+                {
+                    b.Property<string>("EmployeesId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ServicesId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("EmployeesId", "ServicesId");
+
+                    b.HasIndex("ServicesId");
+
+                    b.ToTable("EmployeeService");
+                });
+
+            modelBuilder.Entity("Entities.Models.Employee", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DateOfEmployment")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Employees");
+                });
 
             modelBuilder.Entity("Entities.Models.Order", b =>
                 {
@@ -323,6 +356,21 @@ namespace Database.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("AppUser");
+                });
+
+            modelBuilder.Entity("EmployeeService", b =>
+                {
+                    b.HasOne("Entities.Models.Employee", null)
+                        .WithMany()
+                        .HasForeignKey("EmployeesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Models.Service", null)
+                        .WithMany()
+                        .HasForeignKey("ServicesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Entities.Models.Order", b =>

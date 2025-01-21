@@ -8,7 +8,6 @@ namespace Logic.Logic
     public interface IOrderLogic
     {
         void CreateOrder(OrderCreateDto dto, string userId);
-        void UpdateOrder(string id, OrderUpdateDto dto);
         IEnumerable<OrderViewDto> GetAllOrders();
         void DeleteOrder(string id);
         IEnumerable<OrderShortViewDto> GetOrdersByUserId(string userId);
@@ -33,13 +32,6 @@ namespace Logic.Logic
             var order = _dtoProvider.Mapper.Map<Order>(dto);
             order.UserId = userId;
             _orderRepository.Create(order);
-        }
-
-        public void UpdateOrder(string id, OrderUpdateDto dto)
-        {
-            var old = _orderRepository.FindById(id);
-            _dtoProvider.Mapper.Map(dto, old);
-            _orderRepository.Update(old);
         }
 
         public IEnumerable<OrderViewDto> GetAllOrders()
@@ -71,6 +63,10 @@ namespace Logic.Logic
         {
             var order = _orderRepository.FindById(id);
             order.Status = status;
+            if (status == OrderStatus.Completed)
+            {
+                order.CompletionDate = DateTime.Now;
+            }
             _orderRepository.Update(order);
         }
     }

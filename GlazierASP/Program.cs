@@ -24,6 +24,7 @@ namespace GlazierASP
             builder.Services.AddTransient<DtoProvider>();
             builder.Services.AddTransient<OrderLogic>();
             builder.Services.AddTransient<ServiceLogic>();
+            builder.Services.AddTransient<EmployeeLogic>();
             builder.Services.AddTransient<AdminDashboardLogic>();
 
             builder.Services.AddIdentity<AppUser, IdentityRole>(
@@ -57,6 +58,18 @@ namespace GlazierASP
                     ValidIssuer = "GlazierComp.com",
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345superSecretKey@345superSecretKey@345superSecretKey@345"))
                 };
+            });
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("BasicUser", policy =>
+                {
+                    policy.RequireAssertion(context =>
+                    {
+                        var user = context.User;
+                        return user.Identity.IsAuthenticated;
+                    });
+                });
             });
 
             builder.Services.AddDbContext<AppDbContext>(options =>

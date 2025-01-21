@@ -15,6 +15,8 @@ namespace Entities.Models
         public string Description { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
 
+        public virtual ICollection<Employee>? Employees { get; set; }
+
         public Service(string name, string description)
         {
             Id = Guid.NewGuid().ToString();

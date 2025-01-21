@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Database;
+using Entities.Dto.Employee;
 using Entities.Dto.Order;
 using Entities.Dto.Service;
 using Entities.Dto.User;
@@ -20,6 +21,7 @@ namespace Logic.Helpers
             {
                 cfg.CreateMap<Order, OrderShortViewDto>();
 
+
                 cfg.CreateMap<AppUser, UserViewDto>()
                 .AfterMap(async (src, dest) =>
                 {
@@ -35,9 +37,14 @@ namespace Logic.Helpers
                     dest.Username = user.UserName;
                 });
                 cfg.CreateMap<OrderCreateDto, Order>();
-                cfg.CreateMap<OrderUpdateDto, Service>();
                 cfg.CreateMap<ServiceCreateUpdateDto, Service>();
+                cfg.CreateMap<EmployeeCreateDto, Employee>();
                 cfg.CreateMap<Service, ServiceViewDto>();
+                cfg.CreateMap<Employee, EmployeeViewDto>()
+                .ForMember(dest => dest.Services, opt => opt.MapFrom(src => src.Services))
+                .ForMember(dest => dest.User, opt => opt.MapFrom(src => userManager.Users.FirstOrDefault(u => u.Id == src.UserId)));
+
+
             });
 
             Mapper = new Mapper(config);
