@@ -14,7 +14,7 @@ namespace Logic.Logic
         void deleteService(string id);
     }
 
-    public class ServiceLogic
+    public class ServiceLogic : IServiceLogic
     {
         Repository<Service> _serviceRepository;
         DtoProvider _dtoProvider;

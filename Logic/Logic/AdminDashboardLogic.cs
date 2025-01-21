@@ -20,6 +20,7 @@ namespace Logic.Logic
             var totalUsers = _context.Users.Count();
             var totalOrders = _context.Orders.Count();
             var totalServices = _context.Services.Count();
+            var totalEmployees = _context.Employees.Count();
 
             return new AdminDashboardDto
             {
@@ -27,7 +28,8 @@ namespace Logic.Logic
                 CompletedOrders = completedOrders,
                 TotalUsers = totalUsers,
                 TotalOrders = totalOrders,
-                TotalServices = totalServices
+                TotalServices = totalServices,
+                TotalEmployees = totalEmployees
             };
         }
     }

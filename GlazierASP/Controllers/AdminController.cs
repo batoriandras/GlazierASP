@@ -10,7 +10,7 @@ namespace Endpoint.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : ControllerBase
     {
-        AdminDashboardLogic adminDashboardLogic;
+        private readonly AdminDashboardLogic adminDashboardLogic;
 
         public AdminController(AdminDashboardLogic adminDashboardLogic)
         {

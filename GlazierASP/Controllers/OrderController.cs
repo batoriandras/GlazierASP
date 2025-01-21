@@ -13,8 +13,8 @@ namespace Endpoint.Controllers
     [Authorize(Policy = "BasicUser")]
     public class OrderController : ControllerBase
     {
-        OrderLogic orderLogic;
-        UserManager<AppUser> userManager;
+        private readonly OrderLogic orderLogic;
+        private readonly UserManager<AppUser> userManager;
 
         public OrderController(OrderLogic orderLogic, UserManager<AppUser> userManager)
         {
@@ -61,6 +61,12 @@ namespace Endpoint.Controllers
         public OrderShortViewDto GetShortOrder(string id)
         {
             return orderLogic.GetShortOrderById(id);
+        }
+
+        [HttpGet("userorders/{userid}")]
+        public IEnumerable<OrderShortViewDto> GetOrdersByUserId(string userId)
+        {
+            return orderLogic.GetOrdersByUserId(userId);
         }
     }
 }

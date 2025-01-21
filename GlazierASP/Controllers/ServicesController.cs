@@ -9,7 +9,7 @@ namespace Endpoint.Controllers
     [Route("api/[controller]")]
     public class ServicesController : ControllerBase
     {
-        ServiceLogic serviceLogic;
+        private readonly ServiceLogic serviceLogic;
 
         public ServicesController(ServiceLogic serviceLogic)
         {

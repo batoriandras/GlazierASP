@@ -16,7 +16,7 @@ namespace Logic.Logic
         void UpdateOrderStatus(string id, OrderStatus status);
     }
 
-    public class OrderLogic
+    public class OrderLogic : IOrderLogic
     {
         Repository<Order> _orderRepository;
         DtoProvider _dtoProvider;

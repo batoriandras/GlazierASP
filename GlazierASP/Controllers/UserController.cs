@@ -15,9 +15,9 @@ namespace Endpoint.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        UserManager<AppUser> userManager;
-        RoleManager<IdentityRole> roleManager;
-        DtoProvider dtoProvider;
+        private readonly UserManager<AppUser> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly DtoProvider dtoProvider;
 
         public UserController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, DtoProvider dtoProvider)
         {
@@ -45,6 +45,7 @@ namespace Endpoint.Controllers
         }
 
         [HttpDelete("{userid}")]
+        [Authorize(Roles = "Admin")]
         public async Task DeleteUser(string userid)
         {
             var user = await userManager.FindByIdAsync(userid);
@@ -53,6 +54,7 @@ namespace Endpoint.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IEnumerable<UserViewDto> GetAllUsers()
         {
             return userManager.Users.Select(u => dtoProvider.Mapper.Map<UserViewDto>(u));

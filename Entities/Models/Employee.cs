@@ -13,7 +13,6 @@ namespace Entities.Models
         [Required]
         public string UserId { get; set; }
 
-        [Required]
         public DateTime DateOfEmployment { get; set; }
 
         public virtual ICollection<Service>? Services { get; set; }

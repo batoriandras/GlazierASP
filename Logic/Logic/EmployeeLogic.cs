@@ -15,7 +15,7 @@ namespace Logic.Logic
         void DeleteEmployee(string employeeId);
     }
 
-    public class EmployeeLogic
+    public class EmployeeLogic : IEmployeeLogic
     {
         Repository<Employee> _employeeRepo;
         Repository<Service> _serviceRepo;
@@ -65,13 +65,13 @@ namespace Logic.Logic
         {
             var employee = _employeeRepo.FindById(employeeId);
 
-            if (employee != null)
+            if (employee == null)
             {
-                _employeeRepo.Delete(employee);
+                throw new Exception("Employee not found");
             }
             else
             {
-                throw new Exception("Employee not found");
+                _employeeRepo.Delete(employee);
             }
         }
     }

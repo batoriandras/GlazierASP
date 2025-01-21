@@ -1,6 +1,7 @@
 ﻿using Database;
 using Entities.Dto.Employee;
 using Logic.Logic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,10 +9,11 @@ namespace Endpoint.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class EmployeeController
     {
-        EmployeeLogic employeeLogic;
-        UserManager<AppUser> userManager;
+        private readonly EmployeeLogic employeeLogic;
+        private readonly UserManager<AppUser> userManager;
 
         public EmployeeController(EmployeeLogic employeeLogic, UserManager<AppUser> userManager)
         {
